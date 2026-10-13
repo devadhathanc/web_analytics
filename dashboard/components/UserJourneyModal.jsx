@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState, useCallback } from 'react';
 import Icon from './Icon';
+import { API_BASE } from '../lib/api';
 
 export default function UserJourneyModal({ session, onClose }) {
   const [events, setEvents] = useState([]);
@@ -12,7 +13,7 @@ export default function UserJourneyModal({ session, onClose }) {
     if (!session?.session_id) return;
     let mounted = true;
     setLoading(true);
-    fetch(`http://localhost:5005/api/sessions/${encodeURIComponent(session.session_id)}/events`)
+    fetch(`${API_BASE}/api/sessions/${encodeURIComponent(session.session_id)}/events`)
       .then((r) => r.json())
       .then((d) => { if (mounted) { setEvents(d.events || []); setLoading(false); } })
       .catch(() => { if (mounted) setLoading(false); });

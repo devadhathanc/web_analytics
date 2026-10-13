@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useToast } from './Toast';
 import Icon from './Icon';
+import { API_BASE } from '../lib/api';
 
 export default function Navbar() {
   const pathname = usePathname();
@@ -14,7 +15,7 @@ export default function Navbar() {
   const handleSeedData = async () => {
     try {
       setSeeding(true);
-      const res = await fetch('http://localhost:5005/api/analytics/seed', { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/analytics/seed`, { method: 'POST' });
       const data = await res.json();
       if (data.success) {
         addToast(
@@ -27,7 +28,7 @@ export default function Navbar() {
       }
     } catch (err) {
       console.error('Error seeding data:', err);
-      addToast('Ensure the Flask backend is running on port 5005.', { type: 'error', title: 'Connection failed' });
+      addToast('Ensure the backend is running.', { type: 'error', title: 'Connection failed' });
     } finally {
       setSeeding(false);
     }
@@ -77,7 +78,7 @@ export default function Navbar() {
         </button>
 
         <a
-          href="http://localhost:5005/demo/index.html"
+          href={`${API_BASE}/demo/index.html`}
           target="_blank"
           rel="noreferrer"
           className="btn btn-primary btn-sm"

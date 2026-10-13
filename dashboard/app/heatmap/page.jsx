@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import Icon from '../../components/Icon';
 import HeatmapCanvas from '../../components/HeatmapCanvas';
 import { useToast } from '../../components/Toast';
+import { API_BASE } from '../../lib/api';
 
 export default function HeatmapPage() {
   const [pages, setPages] = useState([]);
@@ -16,7 +17,7 @@ export default function HeatmapPage() {
   const addToast = useToast();
 
   const fetchPages = () => {
-    fetch('http://localhost:5005/api/analytics/pages')
+    fetch(`${API_BASE}/api/analytics/pages`)
       .then((r) => r.json())
       .then((d) => { if (d.success && d.pages) setPages(d.pages); })
       .catch(() => {});
@@ -24,7 +25,7 @@ export default function HeatmapPage() {
 
   const fetchClicks = () => {
     const q = selectedUrl && selectedUrl !== 'all' ? `?url=${encodeURIComponent(selectedUrl)}` : '';
-    fetch(`http://localhost:5005/api/analytics/clicks${q}`)
+    fetch(`${API_BASE}/api/analytics/clicks${q}`)
       .then((r) => r.json())
       .then((d) => { if (d.success) { setClicks(d.clicks || []); setTotalClicks(d.total_clicks || 0); } setLoading(false); })
       .catch(() => setLoading(false));
@@ -40,7 +41,7 @@ export default function HeatmapPage() {
 
   const handleSeedClicks = async () => {
     try {
-      const res = await fetch('http://localhost:5005/api/analytics/seed', { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/analytics/seed`, { method: 'POST' });
       const data = await res.json();
       if (data.success) { addToast(`Seeded ${data.events} events.`, { type: 'success' }); fetchPages(); fetchClicks(); }
     } catch { addToast('Failed to seed data.', { type: 'error' }); }
@@ -68,7 +69,7 @@ export default function HeatmapPage() {
           <button onClick={() => setIsLivePolling(!isLivePolling)} className={`btn btn-sm ${isLivePolling ? 'btn-primary' : 'btn-secondary'}`}>
             <Icon name="radio" size={13} /> {isLivePolling ? 'Live' : 'Paused'}
           </button>
-          <a href="http://localhost:5005/demo/index.html" target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm">
+          <a href={`${API_BASE}/demo/index.html`} target="_blank" rel="noreferrer" className="btn btn-secondary btn-sm">
             <Icon name="externalLink" size={13} /> Demo Store
           </a>
         </div>

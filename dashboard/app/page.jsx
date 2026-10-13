@@ -4,6 +4,7 @@ import React, { useEffect, useState, useRef } from 'react';
 import Link from 'next/link';
 import Icon from '../components/Icon';
 import UserJourneyModal from '../components/UserJourneyModal';
+import { API_BASE } from '../lib/api';
 
 function AnimatedNumber({ value, suffix = '' }) {
   const [displayed, setDisplayed] = useState(0);
@@ -41,8 +42,8 @@ export default function OverviewPage() {
   const fetchDashboardData = async () => {
     try {
       const [statsRes, sessionsRes] = await Promise.all([
-        fetch('http://localhost:5005/api/analytics/stats').then((r) => r.json()).catch(() => ({ stats: {} })),
-        fetch('http://localhost:5005/api/sessions?limit=6').then((r) => r.json()).catch(() => ({ sessions: [] })),
+        fetch(`${API_BASE}/api/analytics/stats`).then((r) => r.json()).catch(() => ({ stats: {} })),
+        fetch(`${API_BASE}/api/sessions?limit=6`).then((r) => r.json()).catch(() => ({ sessions: [] })),
       ]);
       if (statsRes?.stats) setStats(statsRes.stats);
       if (sessionsRes?.sessions) setRecentSessions(sessionsRes.sessions);

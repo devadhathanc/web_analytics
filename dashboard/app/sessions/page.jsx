@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Icon from '../../components/Icon';
 import UserJourneyModal from '../../components/UserJourneyModal';
+import { API_BASE } from '../../lib/api';
 
 export default function SessionsPage() {
   const [sessions, setSessions] = useState([]);
@@ -16,7 +17,7 @@ export default function SessionsPage() {
   const fetchSessions = async (searchQuery = '') => {
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:5005/api/sessions?limit=100&search=${encodeURIComponent(searchQuery)}`);
+      const res = await fetch(`${API_BASE}/api/sessions?limit=100&search=${encodeURIComponent(searchQuery)}`);
       const data = await res.json();
       if (data.success) {
         setSessions(data.sessions || []);
