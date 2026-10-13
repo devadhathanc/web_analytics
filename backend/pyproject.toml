@@ -1,0 +1,16 @@
+[project]
+name = "causalfunnel-backend"
+version = "1.0.0"
+description = "Backend API for CausalFunnel User Analytics and Heatmap tracking"
+requires-python = ">=3.9"
+dependencies = [
+    "flask>=3.0.0",
+    "flask-cors>=4.0.0",
+    "pymongo>=4.6.0",
+    "mongomock>=4.1.2",
+    "python-dotenv>=1.0.0",
+    "dnspython>=2.6.0",
+]
+
+[tool.uv]
+package = false
