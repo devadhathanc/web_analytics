@@ -27,11 +27,16 @@ def health_check():
 def serve_tracker():
     """
     Directly serve the client tracking script so any website can embed it via:
-    <script src="http://localhost:5005/tracker.js" data-endpoint="http://localhost:5005/api/events"></script>
+    <script src="https://your-api.onrender.com/tracker.js" data-endpoint="https://your-api.onrender.com/api/events"></script>
     """
-    tracker_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../tracker/tracker.js"))
-    if os.path.exists(tracker_path):
-        return send_file(tracker_path, mimetype="application/javascript")
+    candidates = [
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../tracker/tracker.js")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "tracker.js")),
+        os.path.abspath(os.path.join(os.path.dirname(__file__), "../dashboard/public/tracker.js")),
+    ]
+    for tracker_path in candidates:
+        if os.path.exists(tracker_path):
+            return send_file(tracker_path, mimetype="application/javascript")
     return jsonify({"error": "tracker.js not found"}), 404
 
 @app.route("/", methods=["GET"])
@@ -55,14 +60,19 @@ def index():
 
 def initialize_database():
     """Auto-seed sample journeys if empty on first boot"""
-    db = get_database()
-    if db.sessions.count_documents({}) == 0:
-        print("[Database] Initializing with realistic e-commerce demonstration journeys...")
-        from routes.analytics import seed_demo_data
-        with app.app_context():
-            seed_demo_data()
+    try:
+        db = get_database()
+        if db.sessions.count_documents({}) == 0:
+            print("[Database] Initializing with realistic e-commerce demonstration journeys...")
+            from routes.analytics import seed_demo_data
+            with app.app_context():
+                seed_demo_data()
+    except Exception as e:
+        print(f"[Database] Startup initialization check: {e}")
+
+# Initialize on application load (supports Gunicorn WSGI workers and standalone runs)
+initialize_database()
 
 if __name__ == "__main__":
-    initialize_database()
     print(f"🚀 Web Analytics API running on http://localhost:{PORT}")
     app.run(host="0.0.0.0", port=PORT, debug=DEBUG)
