@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apex Luxe - Premium Audio & Wearables</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <!-- CausalFunnel Analytics Tracking SDK -->
+  <script src="/tracker.js" data-endpoint="http://localhost:5005/api/events" data-debug="true"></script>
+</head>
+<body>
+  <!-- Navigation Header -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="brand-logo" id="nav-brand">
+        <span class="logo-accent">APEX</span> LUXE
+      </a>
+      <nav class="nav-links">
+        <a href="#featured" class="nav-link active" id="nav-featured">Featured</a>
+        <a href="#products" class="nav-link" id="nav-collection">Collection</a>
+        <a href="#accessories" class="nav-link" id="nav-tech">Audio Gear</a>
+        <a href="#deals" class="nav-link" id="nav-deals">Special Offers</a>
+      </nav>
+      <div class="nav-actions">
+        <button class="icon-btn" id="btn-search" title="Search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        </button>
+        <button class="cart-btn" id="btn-view-cart">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path><line x1="3" y1="6" x2="21" y2="6"></line><path d="M16 10a4 4 0 0 1-8 0"></path></svg>
+          <span class="cart-badge" id="cart-counter">2</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section" id="featured">
+      <div class="hero-content">
+        <div class="pill-tag">🔥 2026 Studio Flagship Release</div>
+        <h1 class="hero-title">Sound Precision.<br><span class="gradient-text">Engineered Perfection.</span></h1>
+        <p class="hero-subtitle">
+          Experience ultra-low latency spatial audio, custom planar magnetic drivers, and 60-hour battery life with the all-new Apex Studio 9 Pro.
+        </p>
+        <div class="hero-cta-group">
+          <button class="btn btn-primary" id="hero-cta">Shop Collection Now</button>
+          <button class="btn btn-secondary" id="hero-demo-btn">Explore Features</button>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="product-badge-card glass-panel">
+          <div class="spec-stat">
+            <span class="stat-number">0.02ms</span>
+            <span class="stat-desc">Ultra-low latency</span>
+          </div>
+          <div class="spec-divider"></div>
+          <div class="spec-stat">
+            <span class="stat-number">60 hrs</span>
+            <span class="stat-desc">Active Battery</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product Showcase -->
+    <section class="products-section" id="products">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">Trending Hardware</h2>
+          <p class="section-subtitle">Click items to generate real user analytics events</p>
+        </div>
+        <div class="filter-pills">
+          <button class="filter-pill active" id="filter-all">All Products</button>
+          <button class="filter-pill" id="filter-audio">Audio</button>
+          <button class="filter-pill" id="filter-wearables">Wearables</button>
+        </div>
+      </div>
+
+      <div class="product-grid">
+        <!-- Product 1 -->
+        <article class="product-card glass-panel" id="card-apex-pro">
+          <div class="card-tag">Best Seller</div>
+          <div class="product-icon-wrap audio-gradient">🎧</div>
+          <h3 class="product-name">Apex Pro Wireless</h3>
+          <p class="product-desc">Spatial planar audio with hybrid active noise cancellation.</p>
+          <div class="product-pricing">
+            <span class="price">$299.00</span>
+            <span class="rating">★ 4.9 (420)</span>
+          </div>
+          <div class="card-buttons">
+            <button class="btn btn-small btn-outline" id="btn-view-headphones">Quick View</button>
+            <button class="btn btn-small btn-primary" id="btn-add-headphones">Add to Cart</button>
+          </div>
+        </article>
+
+        <!-- Product 2 -->
+        <article class="product-card glass-panel" id="card-watch-ultra">
+          <div class="card-tag premium-tag">New</div>
+          <div class="product-icon-wrap watch-gradient">⌚</div>
+          <h3 class="product-name">Smart Watch Ultra</h3>
+          <p class="product-desc">Titanium chassis with biometric ECG and multi-day GPS battery.</p>
+          <div class="product-pricing">
+            <span class="price">$399.00</span>
+            <span class="rating">★ 4.8 (312)</span>
+          </div>
+          <div class="card-buttons">
+            <button class="btn btn-small btn-outline" id="btn-view-watch">Quick View</button>
+            <button class="btn btn-small btn-primary" id="btn-add-watch">Add to Cart</button>
+          </div>
+        </article>
+
+        <!-- Product 3 -->
+        <article class="product-card glass-panel" id="card-earbuds">
+          <div class="product-icon-wrap buds-gradient">🎵</div>
+          <h3 class="product-name">Luxe Studio Earbuds</h3>
+          <p class="product-desc">Dual dynamic armature drivers with IPX8 waterproof rating.</p>
+          <div class="product-pricing">
+            <span class="price">$189.00</span>
+            <span class="rating">★ 4.7 (188)</span>
+          </div>
+          <div class="card-buttons">
+            <button class="btn btn-small btn-outline" id="btn-view-earbuds">Quick View</button>
+            <button class="btn btn-small btn-primary" id="btn-add-earbuds">Add to Cart</button>
+          </div>
+        </article>
+
+        <!-- Product 4 -->
+        <article class="product-card glass-panel" id="card-stylus">
+          <div class="product-icon-wrap stylus-gradient">✒️</div>
+          <h3 class="product-name">Titan Precision Stylus</h3>
+          <p class="product-desc">4096 pressure levels with haptic feedback and tilt sensitivity.</p>
+          <div class="product-pricing">
+            <span class="price">$99.00</span>
+            <span class="rating">★ 4.9 (95)</span>
+          </div>
+          <div class="card-buttons">
+            <button class="btn btn-small btn-outline" id="btn-view-stylus">Quick View</button>
+            <button class="btn btn-small btn-primary" id="btn-add-stylus">Add to Cart</button>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Checkout / Promo Banner -->
+    <section class="banner-section glass-panel">
+      <div class="banner-content">
+        <h2>Ready to complete your audio setup?</h2>
+        <p>Orders placed today receive complimentary priority courier shipping.</p>
+      </div>
+      <button class="btn btn-primary btn-large" id="btn-checkout-now">Proceed to Checkout →</button>
+    </section>
+  </main>
+
+  <!-- ╔══════════════════════════════════════╗
+       ║          CART DRAWER                ║
+       ╚══════════════════════════════════════╝ -->
+  <div id="cart-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);backdrop-filter:blur(4px);z-index:500;" onclick="closeCart()"></div>
+
+  <aside id="cart-drawer" style="
+    position:fixed;top:0;right:0;height:100vh;width:380px;max-width:95vw;
+    background:#0e111a;border-left:1px solid rgba(255,255,255,0.08);
+    box-shadow:-12px 0 50px rgba(0,0,0,0.7);
+    display:flex;flex-direction:column;z-index:501;
+    transform:translateX(100%);transition:transform 0.3s cubic-bezier(0.16,1,0.3,1);
+  ">
+    <!-- Header -->
+    <div style="padding:18px 20px;border-bottom:1px solid rgba(255,255,255,0.08);display:flex;align-items:center;justify-content:space-between;flex-shrink:0;">
+      <div>
+        <h2 style="font-size:1rem;font-weight:700;color:#f3f4f6;">Your Cart</h2>
+        <p id="cart-item-count-text" style="font-size:0.75rem;color:#6b7280;margin-top:2px;">2 items</p>
+      </div>
+      <button onclick="closeCart()" style="background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.1);color:#9ca3af;width:30px;height:30px;border-radius:6px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;">✕</button>
+    </div>
+
+    <!-- Items -->
+    <div id="cart-items-list" style="flex:1;overflow-y:auto;padding:16px 20px;display:flex;flex-direction:column;gap:14px;">
+      <!-- populated by JS -->
+    </div>
+
+    <!-- Footer -->
+    <div style="padding:16px 20px;border-top:1px solid rgba(255,255,255,0.08);flex-shrink:0;">
+      <div style="display:flex;justify-content:space-between;margin-bottom:6px;font-size:0.82rem;color:#9ca3af;">
+        <span>Subtotal</span><span id="cart-subtotal">$0.00</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:14px;font-size:0.82rem;color:#9ca3af;">
+        <span>Shipping</span><span style="color:#10b981;">Free</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:18px;font-size:1rem;font-weight:700;color:#f3f4f6;border-top:1px solid rgba(255,255,255,0.08);padding-top:12px;">
+        <span>Total</span><span id="cart-total">$0.00</span>
+      </div>
+      <button id="btn-cart-checkout" style="
+        width:100%;padding:13px;background:linear-gradient(135deg,#3b82f6,#8b5cf6);
+        border:none;border-radius:10px;color:white;font-weight:700;font-size:0.9rem;
+        cursor:pointer;transition:opacity 0.2s;
+      " onclick="handleCheckout()">
+        Proceed to Checkout →
+      </button>
+      <button onclick="closeCart()" style="width:100%;padding:10px;background:transparent;border:none;color:#6b7280;font-size:0.8rem;cursor:pointer;margin-top:8px;">Continue Shopping</button>
+    </div>
+  </aside>
+
+  <!-- Floating Analytics Debug Widget -->
+  <aside class="tracker-floating-badge" id="analytics-badge">
+    <div class="badge-header">
+      <div class="status-pulse"></div>
+      <span class="badge-title">Web Analytics Live</span>
+      <button class="badge-toggle" id="btn-badge-toggle">−</button>
+    </div>
+    <div class="badge-body" id="badge-details">
+      <div class="badge-row">
+        <span class="badge-label">Session ID:</span>
+        <span class="badge-val" id="badge-session-id">Loading...</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge-label">Clicks in Page:</span>
+        <span class="badge-val" id="badge-click-count">0</span>
+      </div>
+      <div class="badge-row">
+        <span class="badge-label">Last Click:</span>
+        <span class="badge-val" id="badge-last-click">None</span>
+      </div>
+      <div class="badge-actions">
+        <button class="btn btn-badge" id="btn-new-session">New Session</button>
+        <a href="http://localhost:3000" target="_blank" class="btn btn-badge-primary" id="btn-open-dashboard">View Dashboard ↗</a>
+      </div>
+    </div>
+  </aside>
+
+  <script>
+  // ═══════════════════════════════════
+  //  Cart State
+  // ═══════════════════════════════════
+  const PRODUCTS = {
+    headphones: { name: 'Apex Pro Wireless',      price: 299, emoji: '🎧' },
+    watch:      { name: 'Smart Watch Ultra',       price: 399, emoji: '⌚' },
+    earbuds:    { name: 'Luxe Studio Earbuds',     price: 189, emoji: '🎵' },
+    stylus:     { name: 'Titan Precision Stylus',  price: 99,  emoji: '✒️' },
+  };
+
+  // Start with 2 pre-added items so the badge shows "2"
+  const cart = [
+    { ...PRODUCTS.headphones, id: 'headphones', qty: 1 },
+    { ...PRODUCTS.watch,      id: 'watch',      qty: 1 },
+  ];
+
+  function openCart() {
+    document.getElementById('cart-overlay').style.display = 'block';
+    document.getElementById('cart-drawer').style.transform = 'translateX(0)';
+    renderCart();
+  }
+
+  function closeCart() {
+    document.getElementById('cart-overlay').style.display = 'none';
+    document.getElementById('cart-drawer').style.transform = 'translateX(100%)';
+  }
+
+  function addToCart(productId, btnEl) {
+    const existing = cart.find(i => i.id === productId);
+    if (existing) {
+      existing.qty++;
+    } else {
+      cart.push({ ...PRODUCTS[productId], id: productId, qty: 1 });
+    }
+    updateBadge();
+    // Button feedback
+    const orig = btnEl.textContent;
+    btnEl.textContent = '✓ Added!';
+    btnEl.disabled = true;
+    setTimeout(() => { btnEl.textContent = orig; btnEl.disabled = false; }, 1400);
+    // Flash badge
+    const badge = document.getElementById('cart-counter');
+    badge.style.transform = 'scale(1.5)';
+    setTimeout(() => badge.style.transform = 'scale(1)', 250);
+  }
+
+  function removeFromCart(productId) {
+    const idx = cart.findIndex(i => i.id === productId);
+    if (idx > -1) cart.splice(idx, 1);
+    updateBadge();
+    renderCart();
+  }
+
+  function changeQty(productId, delta) {
+    const item = cart.find(i => i.id === productId);
+    if (!item) return;
+    item.qty = Math.max(1, item.qty + delta);
+    updateBadge();
+    renderCart();
+  }
+
+  function updateBadge() {
+    const total = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cart-counter').textContent = total;
+  }
+
+  function renderCart() {
+    const list = document.getElementById('cart-items-list');
+    const totalItems = cart.reduce((s, i) => s + i.qty, 0);
+    document.getElementById('cart-item-count-text').textContent =
+      totalItems === 1 ? '1 item' : `${totalItems} items`;
+
+    if (cart.length === 0) {
+      list.innerHTML = `
+        <div style="text-align:center;padding:48px 0;color:#4b5563;">
+          <div style="font-size:2rem;margin-bottom:12px;">🛒</div>
+          <p style="font-size:0.9rem;font-weight:600;color:#6b7280;">Your cart is empty</p>
+          <p style="font-size:0.8rem;margin-top:4px;">Add some products to get started.</p>
+        </div>`;
+      document.getElementById('cart-subtotal').textContent = '$0.00';
+      document.getElementById('cart-total').textContent = '$0.00';
+      return;
+    }
+
+    list.innerHTML = cart.map(item => `
+      <div style="
+        background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.07);
+        border-radius:10px;padding:14px;display:flex;align-items:center;gap:12px;
+      ">
+        <div style="font-size:2rem;width:48px;height:48px;background:rgba(255,255,255,0.04);border-radius:8px;display:flex;align-items:center;justify-content:center;flex-shrink:0;">${item.emoji}</div>
+        <div style="flex:1;min-width:0;">
+          <div style="font-size:0.85rem;font-weight:600;color:#f3f4f6;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${item.name}</div>
+          <div style="font-size:0.82rem;color:#6366f1;font-weight:600;margin-top:2px;">$${item.price}.00</div>
+        </div>
+        <div style="display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex-shrink:0;">
+          <div style="display:flex;align-items:center;gap:0;background:rgba(255,255,255,0.06);border-radius:6px;overflow:hidden;border:1px solid rgba(255,255,255,0.08);">
+            <button onclick="changeQty('${item.id}',-1)" style="background:none;border:none;color:#9ca3af;width:28px;height:28px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;">−</button>
+            <span style="min-width:24px;text-align:center;font-size:0.82rem;font-weight:600;color:#f3f4f6;">${item.qty}</span>
+            <button onclick="changeQty('${item.id}',1)" style="background:none;border:none;color:#9ca3af;width:28px;height:28px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;">+</button>
+          </div>
+          <button onclick="removeFromCart('${item.id}')" style="background:none;border:none;color:#4b5563;cursor:pointer;font-size:0.7rem;padding:0;">Remove</button>
+        </div>
+      </div>`).join('');
+
+    const subtotal = cart.reduce((s, i) => s + i.price * i.qty, 0);
+    document.getElementById('cart-subtotal').textContent = `$${subtotal}.00`;
+    document.getElementById('cart-total').textContent = `$${subtotal}.00`;
+  }
+
+  function handleCheckout() {
+    const btn = document.getElementById('btn-cart-checkout');
+    btn.textContent = '✓ Order Placed!';
+    btn.style.background = '#10b981';
+    setTimeout(() => {
+      btn.textContent = 'Proceed to Checkout →';
+      btn.style.background = 'linear-gradient(135deg,#3b82f6,#8b5cf6)';
+      cart.length = 0;
+      updateBadge();
+      renderCart();
+    }, 2000);
+  }
+
+  // ═══════════════════════════════════
+  //  Wire up buttons
+  // ═══════════════════════════════════
+  document.addEventListener('DOMContentLoaded', function() {
+    // Cart open button
+    document.getElementById('btn-view-cart').addEventListener('click', function(e) {
+      e.stopPropagation();
+      openCart();
+    });
+
+    // Add to Cart buttons
+    document.getElementById('btn-add-headphones').addEventListener('click', function() { addToCart('headphones', this); });
+    document.getElementById('btn-add-watch').addEventListener('click',      function() { addToCart('watch', this); });
+    document.getElementById('btn-add-earbuds').addEventListener('click',    function() { addToCart('earbuds', this); });
+    document.getElementById('btn-add-stylus').addEventListener('click',     function() { addToCart('stylus', this); });
+
+    // Hero CTA
+    document.getElementById('hero-cta').addEventListener('click', function() {
+      document.getElementById('products').scrollIntoView({ behavior: 'smooth' });
+    });
+
+    // Checkout banner
+    document.getElementById('btn-checkout-now').addEventListener('click', openCart);
+
+    // Analytics debug badge
+    const sessionEl = document.getElementById('badge-session-id');
+    function updateSessionDisplay() {
+      if (window.CausalTracker && window.CausalTracker.getSessionId) {
+        const sid = window.CausalTracker.getSessionId();
+        sessionEl.textContent = sid.substring(0, 13) + '...';
+        sessionEl.title = sid;
+      }
+    }
+    setTimeout(updateSessionDisplay, 300);
+
+    let clickCount = 0;
+    document.addEventListener('click', function(e) {
+      clickCount++;
+      const el = document.getElementById('badge-click-count');
+      if (el) el.textContent = clickCount;
+      const lc = document.getElementById('badge-last-click');
+      if (lc) lc.textContent = `${e.clientX}x, ${e.clientY}y (${(e.target.tagName||'').toLowerCase()})`;
+    });
+
+    document.getElementById('btn-new-session').addEventListener('click', function(e) {
+      e.stopPropagation();
+      localStorage.removeItem('cf_session_id');
+      localStorage.removeItem('cf_last_activity');
+      document.cookie = 'cf_session_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      if (window.CausalTracker && window.CausalTracker.getSessionId) {
+        const newId = window.CausalTracker.getSessionId();
+        sessionEl.textContent = newId.substring(0, 13) + '...';
+      }
+    });
+
+    const toggleBtn = document.getElementById('btn-badge-toggle');
+    const badgeDetails = document.getElementById('badge-details');
+    toggleBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const hidden = badgeDetails.style.display === 'none';
+      badgeDetails.style.display = hidden ? 'block' : 'none';
+      toggleBtn.textContent = hidden ? '−' : '+';
+    });
+
+    // Badge transition style for cart counter
+    document.getElementById('cart-counter').style.transition = 'transform 0.2s ease';
+  });
+  </script>
+</body>
+</html>
