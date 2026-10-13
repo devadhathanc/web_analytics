@@ -1,0 +1,22 @@
+{
+  "name": "causalfunnel-web-analytics",
+  "version": "1.0.0",
+  "description": "Full-stack User Analytics Application with Sessions & Heatmap tracking",
+  "scripts": {
+    "dev:backend": "cd backend && uv run python app.py",
+    "dev:frontend": "cd dashboard && npm run dev",
+    "dev": "./run.sh",
+    "install:all": "cd backend && uv sync && cd ../dashboard && npm install"
+  },
+  "keywords": [
+    "analytics",
+    "heatmap",
+    "user-journey",
+    "nextjs",
+    "flask",
+    "uv",
+    "mongodb"
+  ],
+  "author": "Full Stack Engineer Candidate",
+  "license": "MIT"
+}
