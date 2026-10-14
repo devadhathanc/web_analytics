@@ -1,6 +1,12 @@
 /**
  * CausalFunnel Analytics Tracker SDK
  * Lightweight, zero-dependency client tracking script.
+ * 
+ * Features:
+ * - Session tracking via localStorage / Cookie with inactivity timeout.
+ * - Automatic page_view tracking (with SPA history API support).
+ * - Click tracking with absolute coordinates, relative viewport percentages, and element selectors.
+ * - Micro-batching queue with navigator.sendBeacon fallback for high reliability.
  */
 (function (root, factory) {
   if (typeof module === 'object' && module.exports) {
@@ -30,6 +36,7 @@
   var flushTimer = null;
   var initialized = false;
 
+  // Generate UUID v4
   function generateUUID() {
     if (typeof crypto !== 'undefined' && crypto.randomUUID) {
       return crypto.randomUUID();
@@ -41,6 +48,7 @@
     });
   }
 
+  // Cookie helpers
   function setCookie(name, value, days) {
     var expires = '';
     if (days) {
@@ -64,6 +72,7 @@
     return null;
   }
 
+  // Session Manager
   function getSessionId() {
     var now = Date.now();
     var lastActivity = null;
@@ -101,6 +110,7 @@
     }
   }
 
+  // Helper to extract a concise CSS selector
   function getElementSelector(el) {
     if (!el || el.nodeType !== 1) return '';
     var parts = [];
@@ -121,6 +131,7 @@
     return parts.join(' > ');
   }
 
+  // Event dispatching & batching
   function enqueue(eventPayload) {
     eventQueue.push(eventPayload);
     if (config.debug) {
@@ -146,6 +157,7 @@
 
     var jsonString = JSON.stringify(payload.length === 1 ? payload[0] : payload);
 
+    // If page is unloading, try sendBeacon first
     if (isUnload && typeof navigator !== 'undefined' && typeof navigator.sendBeacon === 'function') {
       try {
         var blob = new Blob([jsonString], { type: 'application/json' });
@@ -153,9 +165,11 @@
           return;
         }
       } catch (e) {
+        // Fallback to fetch
       }
     }
 
+    // Standard reliable HTTP Fetch
     if (typeof fetch === 'function') {
       fetch(config.endpoint, {
         method: 'POST',
@@ -174,6 +188,7 @@
     }
   }
 
+  // Track event core
   function track(eventType, details) {
     if (Math.random() > config.sampleRate) return;
 
@@ -202,6 +217,7 @@
     enqueue(payload);
   }
 
+  // Event handlers
   function handlePageView() {
     track('page_view', {
       title: document.title,
@@ -214,11 +230,15 @@
     var vw = window.innerWidth || 1;
     var vh = window.innerHeight || 1;
 
+    // Viewport coordinates
     var x = e.clientX;
     var y = e.clientY;
+
+    // Document coordinates (including scroll offset)
     var pageX = e.pageX || (x + (window.scrollX || window.pageXOffset || 0));
     var pageY = e.pageY || (y + (window.scrollY || window.pageYOffset || 0));
 
+    // Normalized percentages for responsive heatmap plotting
     var xPercent = parseFloat(((x / vw) * 100).toFixed(2));
     var yPercent = parseFloat(((y / vh) * 100).toFixed(2));
 
@@ -241,6 +261,7 @@
     });
   }
 
+  // Setup automatic SPA history navigation listening
   function setupSpaListeners() {
     var originalPushState = history.pushState;
     if (originalPushState) {
@@ -263,21 +284,19 @@
     window.addEventListener('popstate', handlePageView);
   }
 
+  // Setup lifecycle listeners to flush on tab close/switch
   function setupLifecycleListeners() {
     document.addEventListener('visibilitychange', function () {
       if (document.visibilityState === 'hidden') {
-        flush(true);
+        flush();
       }
     });
 
-    window.addEventListener('beforeunload', function() {
-      flush(true);
-    });
-    window.addEventListener('pagehide', function() {
-      flush(true);
-    });
+    window.addEventListener('beforeunload', flush);
+    window.addEventListener('pagehide', flush);
   }
 
+  // Initialize
   function init(options) {
     if (initialized) return;
     initialized = true;
@@ -310,6 +329,7 @@
     }
   }
 
+  // Auto-init from script tag attributes if present
   if (typeof document !== 'undefined') {
     var currentScript = document.currentScript;
     if (currentScript) {
@@ -317,9 +337,19 @@
       var debugAttr = currentScript.getAttribute('data-debug');
       var autoInitAttr = currentScript.getAttribute('data-auto-init');
 
+      var derivedEndpoint = DEFAULT_ENDPOINT;
+      if (endpointAttr) {
+        derivedEndpoint = endpointAttr;
+      } else if (currentScript.src) {
+        try {
+          var scriptUrl = new URL(currentScript.src, window.location.href);
+          derivedEndpoint = scriptUrl.origin + '/api/events';
+        } catch (e) {}
+      }
+
       if (autoInitAttr !== 'false') {
         init({
-          endpoint: endpointAttr || DEFAULT_ENDPOINT,
+          endpoint: derivedEndpoint,
           debug: debugAttr === 'true'
         });
       }

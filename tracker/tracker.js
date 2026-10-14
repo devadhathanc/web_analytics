@@ -337,9 +337,19 @@
       var debugAttr = currentScript.getAttribute('data-debug');
       var autoInitAttr = currentScript.getAttribute('data-auto-init');
 
+      var derivedEndpoint = DEFAULT_ENDPOINT;
+      if (endpointAttr) {
+        derivedEndpoint = endpointAttr;
+      } else if (currentScript.src) {
+        try {
+          var scriptUrl = new URL(currentScript.src, window.location.href);
+          derivedEndpoint = scriptUrl.origin + '/api/events';
+        } catch (e) {}
+      }
+
       if (autoInitAttr !== 'false') {
         init({
-          endpoint: endpointAttr || DEFAULT_ENDPOINT,
+          endpoint: derivedEndpoint,
           debug: debugAttr === 'true'
         });
       }
